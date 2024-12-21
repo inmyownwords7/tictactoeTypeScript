@@ -1,14 +1,15 @@
-import {ReactElement,  useState} from "react";
-// Lifting the state up????
-export default function Player({initialName, symbol, isActive}) {
-    const [playerName, setPlayerName] = useState(initialName);
-    const [isEditing, setIsEditing] = useState(false);
+import {ReactElement,  SetStateAction, useState} from "react";
+/// <reference path="../types/types.d.ts" />
+
+export default function Player({initialName, isActive}: PlayerProps) {
+    const [playerName, setPlayerName] = useState<string>(initialName);
+    const [isEditing, setIsEditing] = useState<boolean>(false);
 
     function handleEdit() {
         setIsEditing((editing) => !editing);
     }
 
-    function handleChange(event) {
+    function handleChange(event: { target: { value: SetStateAction<string>; }; }) {
         setPlayerName(event.target.value)
     }
 

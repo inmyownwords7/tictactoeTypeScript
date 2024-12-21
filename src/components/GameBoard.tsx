@@ -1,32 +1,18 @@
-import { useState } from "react";
 
-const initialGameBoard: Array<Array<string | null>> = [
-    [null, null, null],
-    [null, null, null],
-    [null, null, null],
-];
 
-export default function GameBoard({ onSelectSquare, activePlayerSymbol}) {
-    const [gameBoard, setGameBoard] = useState(initialGameBoard);
+export default function GameBoard({onSelectSquare, board}: GameBoardProps) {
 
-    // Select the squares with indexes
-    function handleGameBoardChange(rowIndex: number, columnIndex: number) {
-        setGameBoard((prevState) => {
-            const updatedGameBoard = prevState.map((innerArray) => [...innerArray]); // Create a deep copy
-            updatedGameBoard[rowIndex][columnIndex] = activePlayerSymbol; // Update the specific cell
-            return updatedGameBoard;
-        });
-        onSelectSquare();
-    }
-
+//TODO Use anonymous functions as much as possible for events
     return (
         <ol id="game-board">
-            {gameBoard.map((row, rowIndex) => (
+            {board.map((row: [], rowIndex: number) => (
                 <li key={rowIndex}>
                     <ol>
                         {row.map((playerSymbol, colIndex) => (
                             <li key={colIndex}>
-                                <button onClick={() => handleGameBoardChange(rowIndex, colIndex)}>
+                                <button onClick={() => onSelectSquare(rowIndex, colIndex)}
+                                        disabled={playerSymbol !== null}
+                                >
                                     {playerSymbol}
                                 </button>
                             </li>
