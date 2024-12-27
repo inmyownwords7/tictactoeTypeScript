@@ -5,6 +5,7 @@ declare global {
         initialName: string;
         symbol: string;
         isActive: boolean;
+        onChangeName: (symbol: string, playerName: string) => void;
     }
 
     interface GameBoardProps {
@@ -14,8 +15,8 @@ declare global {
     }
 
     interface Square {
-        row:number;
-        col:number;
+        row: number;
+        col: number;
     }
 
     interface Turn {
@@ -24,7 +25,15 @@ declare global {
     }
 
     type GameBoardState = (string | null)[][];
-    type playerSymbolType = "X" | "O" | null
 
+    interface GameOverProps {
+        winner: string | null;
+        onRestart: () => void;
+    }
 
+    interface PlayerSymbol {
+        X: string;
+        O: string;
+        null?: null;
+    }
 }
